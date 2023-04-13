@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Landing Page</title>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/upload.js"></script>
+    <style>
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <form action="/upload_data/" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Upload File</h1>
+        <input type="file" accept=".csv" name="csv_file" id="csv_file" required="True" >
+        <br><br>
+        <button>Upload</button>
+        <label style="color:red;">{{ error_msg }}</label>
+        <label style="color:green;">{{ success_msg }}</label>
+    </form>
+</div>
+<br>
+<hr>
+<div>
+    <h1>Start Date</h1>
+    <input id="start_date" type="date">
+    <h1>End Date</h1>
+    <input id="end_date"type="date">
+    <br><br>
+    <button id="fetch_btn" onclick="fetch_data()">Fetch Data and Generate Report</button>
+    <br>
+    <hr>
+    <h1>Results :</h1>
+    <div id="table_data">
+
+    </div>
+</div>
+<br><hr>
+
+</body>
+<script type="text/javascript">     window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
+</html>
